@@ -133,4 +133,5 @@ ORDER BY hour)
 SELECT * FROM HourlyWatch
 ```
 We can fetch the data for Data Studio
+
 <img src="https://storage.googleapis.com/images_video_watch/data_studio.png" width="700" height="300" />
