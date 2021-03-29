@@ -1,29 +1,37 @@
 [
-{
-"name": "metric",
-"type": "STRING",
-"mode": "REQUIRED"
-},
-{
-"name": "date_watch",
-"type": "DATE",
-"mode": "REQUIRED"
-},
-{
-"name": "time_watch",
-"type": "TIME",
-"mode": "REQUIRED"
-},
-{
-"name": "platform",
-"type": "STRING"
-},
-{
-"name": "site",
-"type": "STRING"
-},
-{
-"name": "video",
-"type": "STRING",
-"mode": "REQUIRED"
-}]
+    {
+        "name": "date_watch",
+        "type": "DATE",
+        "mode": "REQUIRED"
+    },
+    {
+        "name": "time_watch",
+        "type": "TIME",
+        "mode": "REQUIRED"
+    },
+    {
+        "name": "platform",
+        "type": "STRING"
+    },
+    {
+        "name": "site",
+        "type": "STRING"
+    },
+    {
+        "name": "video",
+        "type": "STRING",
+        "mode": "REQUIRED"
+    },
+    {
+        "name": "metric",
+        "type": "RECORD",
+        "mode": "REPEATED",
+        "fields": [
+            {
+                "name": "event",
+                "type": "STRING",
+                "mode": "REQUIRED"
+            }
+        ]
+    }
+]

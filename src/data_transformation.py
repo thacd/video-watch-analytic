@@ -35,25 +35,26 @@ class DataTransformation:
     def transform_row(self, csv_row, field_map):
         row = {}
         _IGNORE_EVENT = '206'
-        video_watched_metric = csv_row[2]
-        list_video_title = csv_row[1].strip().split('|')
         video_date_time_obj = datetime.strptime(csv_row[0].strip(),
                                                 '%Y-%m-%dT%H:%M:%S.%fZ')
-        if (_IGNORE_EVENT not in video_watched_metric) \
+        list_video_title = csv_row[1].strip().split('|')
+        video_watched_metric = \
+            [{'event': e} for e in csv_row[2].strip().split(',')]
+        if (_IGNORE_EVENT not in csv_row[2]) \
                 and (len(list_video_title) > 1):
-            row[field_map[0].name] = video_watched_metric
-            row[field_map[1].name] = video_date_time_obj.date()
-            row[field_map[2].name] = video_date_time_obj.time()
+            row[field_map[0].name] = video_date_time_obj.date()
+            row[field_map[1].name] = video_date_time_obj.time()
             if 'App' in list_video_title[0]:
-                row[field_map[3].name] = \
+                row[field_map[2].name] = \
                     list_video_title[0].split(' ')[1].strip()
             else:
-                row[field_map[3].name] = 'Desktop'
+                row[field_map[2].name] = 'Desktop'
             if self._is_valid_url(list_video_title[0]):
-                row[field_map[4].name] = list_video_title[0].strip()
+                row[field_map[3].name] = list_video_title[0].strip()
             else:
-                row[field_map[4].name] = 'null'
-            row[field_map[5].name] = list_video_title[-1].strip()
+                row[field_map[3].name] = 'null'
+            row[field_map[4].name] = list_video_title[-1].strip()
+            row[field_map[5].name] = video_watched_metric
         return row
 
     def parse_method(self, string_input):
@@ -76,7 +77,7 @@ def run(argv=None):
                     required=False,
                     help='Input file to read. This can be a local file or '
                     'a file in a Google Storage Bucket.',
-                    default='gs://video_watch/data/sample.csv')
+                    default='gs://video_watch/data/video_data.csv')
     parser.add_argument(
                     '--output',
                     dest='output',
