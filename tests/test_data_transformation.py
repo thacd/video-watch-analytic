@@ -48,9 +48,9 @@ class TestDataTransformation(object):
 
         csv_row = ['2017-01-11T00:00:22.000Z',
                    'news| Australian pedophile extradited to US',
-                   '127,157,120,160,104,162,161,163,164,165,166,171,229']
+                   '127,157,120']
         actual = self.dt.transform_row(csv_row, field_map)
-        expected = '127,157,120,160,104,162,161,163,164,165,166,171,229'
+        expected = [{'event': '127'}, {'event': '157'}, {'event': '120'}]
         message = "Row['metric'] is on the right format"
         assert actual['metric'] == expected, message
 
@@ -153,7 +153,7 @@ class TestDataTransformation(object):
                                              '%Y-%m-%dT%H:%M:%S.%fZ').date()
         video_time_watch = datetime.strptime(video_date_time,
                                              '%Y-%m-%dT%H:%M:%S.%fZ').time()
-        expected = [{'metric': '157,120,160,104,162,161,163,164,165,166,171',
+        expected = [{'metric': [{'event': '157'}, {'event': '120'}],
                      'date_watch': video_date_watch,
                      'time_watch': video_time_watch,
                      'platform': 'Web',
