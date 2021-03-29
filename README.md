@@ -109,7 +109,7 @@ python -m data_transformation \
     --temp_location gs://**YOUR_BUCKET_NAME**/temp \
     --template_location gs://**YOUR_BUCKET_NAME**/pipelines/data_transformation
 ```
-![GS](https://storage.googleapis.com/images_video_watch/dataflow.png)
+<img src="https://storage.googleapis.com/images_video_watch/dataflow.png" width="300" height="500" />
 
 Remember to run **pytest** before deploy to Dataflow.
 #### 5. Create a Scheduler Using Google Composer
