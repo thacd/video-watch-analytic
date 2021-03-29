@@ -88,5 +88,47 @@ The schema for the table on Google Big Query
 ]
 ```
 
+## Configuration
+#### 1. Create Project
+Follow these step https://cloud.google.com/appengine/docs/standard/nodejs/building-app/creating-project
+#### 2. Create a Google Cloud Storage Bucket
+Follow these steps from 
+https://cloud.google.com/storage/docs/quickstart-console
+It should look like this
+![GS](https://storage.googleapis.com/images_video_watch/cloud_storage.png)
+#### 3. Clone the code from these git to your local computer
+```
+git clone https://github.com/thacd/video-watch-analytic
+```
+#### 4. Make the Template for Dataflow
+```
+python -m data_transformation \
+    --runner DataflowRunner \
+    --project infotrack-videowatch \
+    --staging_location gs://**YOUR_BUCKET_NAME**/staging \
+    --temp_location gs://**YOUR_BUCKET_NAME**/temp \
+    --template_location gs://**YOUR_BUCKET_NAME**/pipelines/data_transformation
+```
+Remember to run **pytest** before using deploy to Dataflow.
+#### 5. Create a Scheduler Using Google Composer
+Create a Composer environment
+![GS](https://storage.googleapis.com/images_video_watch/composer_environment.png)
+Upload file **src/composer-dataflow-dag.py** to dags/ folder.
+Watch the Schedule on Airflow UI
+![GS](https://storage.googleapis.com/images_video_watch/airflow1.png)
+![GS](https://storage.googleapis.com/images_video_watch/airflow2.png)
 
-
+#### 6. Report
+The report to show the insight of the data is then presented using Google Data Studio https://datastudio.google.com/reporting/dd39abda-3d91-4d2c-bb5d-745d3685e9c1/page/ykz9B)
+For example, using this Query from BigQuery
+```
+WITH HourlyWatch AS(
+SELECT
+  count(*) as hourly_watch, EXTRACT(HOUR FROM time_watch) as hour
+FROM `infotrack-videowatchanalytic.video_watch.video_watch`
+GROUP BY hour
+ORDER BY hour)
+SELECT * FROM HourlyWatch
+```
+We can fetch the data for Data Studio
+![GS](https://storage.googleapis.com/images_video_watch/data_studio.png)
