@@ -1,0 +1,14 @@
+{
+  "description": "Pipeline that do the data transformation from csv file in cloud storage to BigQuery.",
+  "name": "Data Transformation",
+  "parameters": [
+    {
+      "regexes": [
+        "^gs:\\/\\/[^\\n\\r]+$"
+      ],
+      "name": "update",
+      "helpText": "Path of the file csv. ex: gs://dataflow-samples/shakespeare/kinglear.txt",
+      "label": "Input Cloud Storage file(s)"
+    }
+  ]
+}
