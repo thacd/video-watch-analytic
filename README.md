@@ -10,6 +10,7 @@ The data from CSV file are loaded to Google Cloud Storage. We then use Google Da
 2. Google Dataflow
 3. Google Bigquery
 4. Google Data Studio
+5. Google Composer
 
 ## Data
 The format of the CSV file is as follow
