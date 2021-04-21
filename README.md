@@ -95,8 +95,6 @@ Follow these step https://cloud.google.com/appengine/docs/standard/nodejs/buildi
 #### 2. Create a Google Cloud Storage Bucket
 Follow these steps from 
 https://cloud.google.com/storage/docs/quickstart-console
-It should look like this
-![GS](https://storage.googleapis.com/images_video_watch/cloud_storage.png)
 #### 3. Clone the code from these git to your local computer
 ```
 git clone https://github.com/thacd/video-watch-analytic
@@ -110,16 +108,12 @@ python -m data_transformation \
     --temp_location gs://**YOUR_BUCKET_NAME**/temp \
     --template_location gs://**YOUR_BUCKET_NAME**/pipelines/data_transformation
 ```
-<img src="https://storage.googleapis.com/images_video_watch/dataflow.png" width="300" height="500" />
 
 Remember to run **pytest** before deploy to Dataflow.
 #### 5. Create a Scheduler Using Google Composer
-Create a Composer environment
-![GS](https://storage.googleapis.com/images_video_watch/composer_environment.png)
+Create a Composer environment.
 Upload file **src/composer-dataflow-dag.py** to dags/ folder.
 Watch the Schedule on Airflow UI
-![GS](https://storage.googleapis.com/images_video_watch/airflow1.png)
-![GS](https://storage.googleapis.com/images_video_watch/airflow2.png)
 
 #### 6. Report
 The report to show the insight of the data is then presented using Google Data Studio https://datastudio.google.com/reporting/dd39abda-3d91-4d2c-bb5d-745d3685e9c1/page/ykz9B)
@@ -134,5 +128,3 @@ ORDER BY hour)
 SELECT * FROM HourlyWatch
 ```
 We can fetch the data for Data Studio
-
-<img src="https://storage.googleapis.com/images_video_watch/data_studio.png" width="700" height="300" />
